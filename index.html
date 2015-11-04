@@ -60,7 +60,7 @@
       <div class="slides">
 
         <section>
-          <h1>Unicode</h1>
+          <h1>Unicode!</h1>
           <h2>(And how ES6 can help)</h2>
           <p>
             <small> By
@@ -72,39 +72,70 @@
         </section>
 
         <section>
-          <h2 class="fancy"> (Hypothetical Scenario) </h2>
+          <section>
+            <h2 class="fancy"> (Hypothetical Scenario) </h2>
 
-          <aside class="notes" data-markdown>
-            - Tomorrow you get hired for a start-up
-            - It's called Bitter.
-            - The internet needs a place to share its feeling because
-              the intenet has a lot of feelings.
-          </aside>
+            <aside class="notes" data-markdown>
+              - Tomorrow you get hired for a start-up
+              - Our visionary CEO has decided that the internet needs a place to
+                share its feelings because the intenet has a lot of feelings.
+            </aside>
+          </section>
+
+
+          <section>
+            <img src="./img/feelings.gif" alt="">
+            <aside class="notes" data-markdown>
+              - But that's okay; we have a lot of feelings too, so
+                the intenet has a lot of feelings.
+            </aside>
+          </section>
+
+          <section>
+            <img src="./img/bitter-standard.png" alt="bitter" class="no-border bitter-logo">
+
+            <p>
+              <small> (Thanks, <a href="http://kimber.github.io/">Kim</a>!) </small>
+            </p>
+          </section>
+
+            <aside class="notes" data-markdown>
+              - So this app is called Bitter.
+              - It allows you to post short, 140 character long messages.
+              - Pretty simple, right?
+              - I mean, we have feelings too, but with the right app, our
+              animated gif will resemble this instead:
+            </aside>
+
+          <section data-background="./img/feelings-money.gif">
+            <aside class="notes" data-markdown>
+              - With that in mind, let's code it!
+              - Ensure Bitter is loaded in a browser window
+              - Ensure src/index.jsx is loaded in Vim
+              - Demo the app -- type some stuff in it.
+              - `node -e 'console.log("😭".repeat(140))' | pbcopy`
+              - Delete some things to demonstrate counting by two.
+            </aside>
+          </section>
+
+          <section>
+            <h2> (demo) </h2>
+          </section>
         </section>
 
-        <section>
-          <img src="./img/bitter-standard.png" alt="bitter" class="no-border bitter-logo">
-
-          <aside class="notes" data-markdown>
-            - Ensure Bitter is loaded in a browser window
-            - Ensure src/index.jsx is loaded in Vim
-            - Demo the app -- type some stuff in it.
-            - `node -e 'console.log("😭".repeat(140))' | pbcopy`
-            - Delete some things to demonstrate counting by two.
-          </aside>
-        </section>
 
         <section>
           <h2>
-             What does <code> str.length </code> do?
+             What does <code>str.length</code> actually measure?
           </h2>
         </section>
+
+        <!-- What is a JavaScript String anyway? -->
 
         <section>
           <h2> What  <em> is </em> Unicode?  </h2>
         </section>
 
-        <!-- What is a JavaScript String anyway? -->
 
         <!-- talk about characters, code points, code units -->
 
