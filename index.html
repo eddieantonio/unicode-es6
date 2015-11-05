@@ -226,10 +226,10 @@
 
             <p class="fragment"> <em>Later...</em> </p>
 
-            <ul>
-              <li class="fragment"> UTF-8 </li>
-              <li class="fragment"> UTF-16 </li>
-              <li class="fragment"> UTF-32 </li>
+            <ul class="fragment">
+              <li> UTF-8 </li>
+              <li> UTF-16 </li>
+              <li> UTF-32 </li>
             </ul>
 
             <aside class="notes" data-markdown>
@@ -238,10 +238,6 @@
               - At this point, things should seem odd.
               - Why does UTF-32 exist, and why does JavaScript use UTF-16?
             </aside>
-          </section>
-
-          <section>
-            <h2> It requires 21 bits to store any given Unicode code point </h2>
           </section>
         </section>
 
@@ -253,6 +249,14 @@
           <!-- Characters are: Graphic, used for formatting (LF, ZWNJ), for
           control (???), Private-use, Surrogate, Noncharacters, Reserved -->
 
+          <section>
+            BMP + Weird 💩
+          </section>
+
+          <section>
+            <h2> It requires 21 bits to store any given Unicode code point </h2>
+          </section>
+
           <section data-background="./img/some-astral-ass-shit.jpg">
             <h2 class="halo"> UTF-16 needs <strong>two code units</strong> to represent <strong>one astral code point</strong> </h2>
 
@@ -260,10 +264,6 @@
               - UTF-16 does this through *surrogate pairs*, but let's just leave
                 that discussion for another time...
             </aside>
-          </section>
-
-          <section>
-            BMP + Weird 💩
           </section>
         </section>
 
@@ -340,8 +340,15 @@ for (var i = 0; i &lt; str.length; i++) {
               similar to Twitter. Who would have thought? So, we're shifting
               gears; we're gonna be a restaurant review site instead! (that
               aren't any of those around, are there?)
-
             </aside>
+          </section>
+
+          <section>
+            <img src="./img/bitter-food.png" alt="bitter" class="no-border bitter-logo">
+
+            <p>
+              <small> (Thanks, <a href="http://kimber.github.io/">Kim</a>!) </small>
+            </p>
           </section>
 
         </section>
@@ -349,6 +356,18 @@ for (var i = 0; i &lt; str.length; i++) {
         <section>
           <section>
             <h1> Resources </h1>
+          </section>
+
+          <section>
+            <h2> Standards </h2>
+            <ul>
+              <li>
+                <a href="www.unicode.org/versions/Unicode8.0.0/">Unicode 8.0</a>
+              </li>
+              <li>
+                <a href="http://www.ecma-international.org/ecma-262/6.0/">ECMAScript 6</a>
+              </li>
+            </ul>
           </section>
 
           <section>
@@ -369,18 +388,6 @@ for (var i = 0; i &lt; str.length; i++) {
               </li>
               <li>
                 <a href="https://www.youtube.com/watch?v=3AtBE9BOvvk">Tom Scott: Real Life Emoji Keyboard!</a>
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <h2> Standards </h2>
-            <ul>
-              <li>
-                <a href="www.unicode.org/versions/Unicode8.0.0/">Unicode Standard 8.0</a>
-              </li>
-              <li>
-                <a href="http://www.ecma-international.org/ecma-262/6.0/">ECMAScript 6</a>
               </li>
             </ul>
           </section>
