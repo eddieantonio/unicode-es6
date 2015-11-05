@@ -337,9 +337,9 @@ for (var i = 0; i &lt; str.length; i++) {
 
             <aside data-markdown class="notes">
               - The CEO had a revelation, and it turns out that Bitter is too
-              similar to Twitter. Who would have thought? So, we're shifting
-              gears; we're gonna be a restaurant review site instead! (that
-              aren't any of those around, are there?)
+                similar to Twitter. Who would have thought? So, we're shifting
+                gears; we're gonna be a restaurant review site instead! (there
+                aren't any of those around, are there?)
             </aside>
           </section>
 
@@ -350,7 +350,122 @@ for (var i = 0; i &lt; str.length; i++) {
               <small> (Thanks, <a href="http://kimber.github.io/">Kim</a>!) </small>
             </p>
           </section>
+        </section>
 
+        <section>
+          <section>
+            <p> There are multiple ways of representing the same
+              <em>abstract</em> character sequence </p>
+          </section>
+
+          <section>
+            <h1>Normalization forms!</h1>
+
+            <p> Useful for comparing <em>different representations</em> of the same
+              abstract character sequence </p>
+          </section>
+
+          <section>
+            <ul>
+              <li><strong> NFD </strong> Canonical decomposition </li>
+              <li><strong> NFC </strong> Canonical decomposition, followed by Canonical Composition</li>
+              <li><strong> NFKD </strong> Compatibility Decomposition</li>
+              <li><strong> NFKC </strong> Compatibility Decomposition, followed by Canonical Composition </li>
+            </ul>
+
+            <p>
+              <small> (See <a href="http://unicode.org/reports/tr15/"> UAX #15</a>) </small>
+            </p>
+
+            <aside data-markdown class="notes">
+              - There are four normalization forms, of which we'll discuss two
+              - There's NFD, canonical decomposition -- essentially, this
+                breaks apart characters that can be represented by multiple
+                combining characters, and sorts the combining characters
+                (usually accents) in a "canonical" order.
+              - Then there's NFC, which is just like NFD, except it pieces
+                those combining characters back together again.
+            </aside>
+          </section>
+
+          <section>
+            <h2> Three different ways of writing 🍲 </h2>
+            <ul>
+              <li>phở <!-- use NFC character... my font renders it wrong --> <span class="fragment"> = <strong>o + ◌̛ + ◌̉</strong> </span></li>
+              <li>phở <span class="fragment"> = <strong>ơ + ◌̉</strong> </span></li>
+              <li>phở <span class="fragment"> = <strong>ở</strong> </span></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Enter: </h2>
+            <h3><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.normalize"><code>String.prototype.normalize()</code></a></h3>
+
+            <aside class="notes" data-markdown>
+              - That's why ES6 introduced String.normalize()
+              - Can convert into any of the four abou
+              - **NOT** available in Core.JS, though modern browsers (such as
+                Chrome, FireFox, and Edge [but not Safari :c]) provided it built-in.
+            </aside>
+
+            <!-- TODO: ES6 compat table. -->
+          </section>
+
+          <section>
+            <p> When in doubt, use </p>
+            <h2> NFC </h2>
+
+            <aside class="notes" data-markdown>
+              - When in doubt, use NFC.
+              - Twitter uses it, even its input thing doesn't.
+              - In fact, if you provide no argument to String.normalize(),
+                it does NFC by default.
+              - The one for String iterates through code points!
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1> Footnotes </h1>
+          </section>
+
+          <section>
+            <h2> Regexes </h2>
+          </section>
+
+          <section>
+            <h2> Astral code point escape </h2>
+
+            <li class="fragment"> to escape a BMP character: <code>"\u0CA0"</code> = ಠ </li>
+            <li class="fragment"> to escape a non-BMP character: <code>"\u{10085}"</code> = 𐂅  </li>
+          </section>
+
+          <section>
+            <h2> <code>codePointAt()</code> vs. <code>charCodeAt()</code> </h2>
+            <h2 class="fragment"> <code>fromCodePoint()</code> vs. <code>fromCharCode()</code> </h2>
+          </section>
+
+          <section>
+            <h2> Identifiers </h2>
+            <p> (Variable names) </p>
+
+            <p class="fragment"> <a href="http://www.unicode.org/reports/tr31/">UAX #31</a> defines what a character is </p>
+            <p class="fragment"> <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-identifier-names-static-semantics-early-errors">The standard</a> adds "$", "_" to this definition. </p>
+
+            <p class="fragment"> <a href="https://mothereff.in/js-variables"> ES6 variable name validator </a> </p>
+          </section>
+
+          <section>
+            <h2> Compatibility </h2>
+
+            <p> Check the <a href="https://kangax.github.io/compat-table/es6/#test-String.prototype_methods">compatibility table</a>! </p>
+          </section>
+
+        </section>
+
+        <section>
+          <h1> ASK ME QUESTIONS </h1>
         </section>
 
         <section>
@@ -404,6 +519,7 @@ for (var i = 0; i &lt; str.length; i++) {
             </ul>
           </section>
         </section>
+
 
       </div>
     </div>
