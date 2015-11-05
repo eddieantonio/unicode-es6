@@ -45,6 +45,11 @@
         max-height: initial;
         max-width: 75%;
       }
+
+      h2.halo {
+        color: black;
+        text-shadow: -0.1em -0.1em 1em rgba(255,255,255,1), 1em 0 1em rgba(255,255,255,1), -0.1em 0 1em rgba(255,255,255,1), -0.3em 0.3em 1em rgba(255,255,255,1), -0.3em -0.1em 1em rgba(255,255,255,1);
+      }
     </style>
 
     <!--[if lt IE 9]>
@@ -238,8 +243,78 @@
             <h1> A tour of the Unicode character space! </h1>
           </section>
 
+          <section data-background="./img/some-astral-ass-shit.jpg">
+            <h2 class="halo"> UTF-16 needs <strong>two code units</strong> to represent <strong>one astral code point</strong> </h2>
+
+            <aside class="notes" data-markdown>
+              - UTF-16 does this through *surrogate pairs*, but let's just leave
+                that discussion for another time...
+            </aside>
+          </section>
+
           <section>
             BMP + Weird 💩
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2> Back to our problem... </h2>
+            <p> We want to count
+              <strong> code points </strong>
+              not
+              <strong> code units </strong>
+            </p>
+          </section>
+
+          <section>
+            <h2>Enter: </h2>
+            <h3><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype-@@iterator"><code>String.prototype[@@iterator]</code></a></h3>
+
+            <p class="fragment">
+              <small>(<code>String.prototype.codePointAt()</code> exists too)</small>
+            </p>
+
+            <aside class="notes" data-markdown>
+              - among the slew of new features ES6 introduced are iterators
+              - The one for String iterates through code points!
+            </aside>
+          </section>
+
+          <section>
+            <blockquote>
+              When the @@iterator method is called it returns an Iterator
+              object (<a href="http://www.ecma-international.org/ecma-262/6.0/#sec-iterator-interface">25.1.1.2</a>)
+              that <strong>iterates over the code points</strong> of a String
+              value, returning each code point as a String value.
+            </blockquote>
+          </section>
+
+          <section>
+            <h2>Compare</h2>
+            <pre><code data-trim>
+for (var i = 0; i &lt; str.length; i++) {
+  console.log(s[i]);
+}
+            </code></pre>
+
+            <h3>vs.</h3>
+
+            <pre><code data-trim>
+for (var c of s) {
+  console.log(c);
+}
+            </code></pre>
+
+            <aside data-markdown class="notes">
+              - it's not just prettier; it iterates completely differently.
+            </aside>
+          </section>
+
+          <section>
+            <h2> Let's fix our code! </h2>
+
+            <p class="fragment"> Trick: Use <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.from">Array#from</a> </p>
           </section>
         </section>
 
