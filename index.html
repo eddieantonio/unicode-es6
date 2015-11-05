@@ -123,24 +123,127 @@
           </section>
         </section>
 
-
         <section>
-          <h2>
-             What does <code>str.length</code> actually measure?
-          </h2>
+          <section>
+            <h2>
+               What does <code>str.length</code> actually measure?
+            </h2>
+            <p class="fragment"> Let's consult the <a
+                href="http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types-string-type">standard</a>!
+            </p>
+          </section>
+
+          <section>
+            <blockquote>
+              <p> The String type is the set of all ordered sequences of zero
+                or more <strong>16-bit unsigned integer values</strong>
+                (“elements”) ...
+
+              <p class="fragment">The String type is generally used to
+                represent textual data in a running ECMAScript program, in
+                which case each element in the String is treated as a
+                <strong>UTF-16 code unit</strong> value.
+
+              <p class="fragment"> The length of a String is the
+                <strong>number</strong> of elements (i.e., <strong>16-bit
+                  values</strong>) within it.</p>
+              </blockquote>
+            </section>
+
+          <section>
+            <h2> What the 👿 is a UTF-16 code value‽ </h2>
+          </section>
+
         </section>
 
         <!-- What is a JavaScript String anyway? -->
 
         <section>
-          <h2> What  <em> is </em> Unicode?  </h2>
+          <section>
+            <h1> Unicode! </h1>
+          </section>
+
+          <section>
+            <h1> What is Unicode? </h1>
+            <ul>
+              <li class="fragment"> A list of numbers (<em>code points</em>) that map to each character. Ever. </li>
+              <li class="fragment"> Database of properties for each code point (e.g., name, general category). </li>
+              <li class="fragment"> <del>a character encoding</del>
+                <span class="fragment"> It's several character encodings! </span>
+              </li>
+              <li class="fragment"> a consortium! </li>
+            </ul>
+            <aside class="notes" data-markdown>
+              - Unicode is a lot of things.
+              - It's the database of characters (among other things).
+              - Characters are abstract representations of the smallest units
+                of written semantic value in written language
+                [Unicode:3](http://www.unicode.org/versions/Unicode8.0.0/ch02.pdf).
+              - If you're dealing with text, you're most likely dealing with Unicode
+              - Unicode is NOT a character encodings. That is, Unicode does
+                not specify a single way to turn code points into binary for
+                transmission, and storage. It defines several such formats,
+                including UTF-8, and what JavaScript uses, UTF-16.
+            </aside>
+          </section>
+
+          <section>
+            <h2> Code Points </h2>
+            <p> Unique number given to each character </p>
+            <!-- insert some example code points -->
+
+            <p class="fragment"> Range from 0 to 10FFFF<sub>16</sub> </p>
+
+            <div class="fragment">
+              <p> 1,114,112 code points available in total </p>
+
+              <p> <small>(See <a href="http://www.unicode.org/versions/Unicode8.0.0/ch02.pdf">Unicode Chapter 3</a>)</small> </p>
+            </div>
+          </section>
+
+
+          <section>
+            <h2> Code Unit </h2>
+            <p> One unit </p>
+          </section>
+
+          <section>
+            <h2> Ways of transmitting code points </h2>
+
+            <ul>
+              <li class="fragment"> UTF-8 </li>
+              <li class="fragment"> UTF-16 </li>
+            </ul>
+
+            <p class="fragment"> <em>Later...</em> </p>
+
+            <ul>
+              <li class="fragment"> UTF-7 </li>
+              <li class="fragment"> UTF-32 </li>
+            </ul>
+
+            <aside class="notes" data-markdown>
+              - At this point, things should seem odd.
+              - Why does UTF-32 exist, and why does JavaScript use UTF-16?
+            </aside>
+          </section>
+
+          <section>
+            <h2> It requires 21 bits to store any given Unicode code point </h2>
+          </section>
         </section>
 
+        <section>
+          <section>
+            <h1> A tour of the Unicode character space! </h1>
+          </section>
 
-        <!-- talk about characters, code points, code units -->
+          <section>
+            BMP + Weird 💩
+          </section>
+        </section>
 
       </div>
-
     </div>
 
     <script src="lib/js/head.min.js"></script>
