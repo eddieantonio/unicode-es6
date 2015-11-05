@@ -84,6 +84,9 @@
               - Tomorrow you get hired for a start-up
               - Our visionary CEO has decided that the internet needs a place to
                 share its feelings because the intenet has a lot of feelings.
+              - But, we don't want them to share *too many* feelings all at
+                once; only allow them to share feelings 140 characters at a
+                time.
             </aside>
           </section>
 
@@ -120,6 +123,7 @@
               - Demo the app -- type some stuff in it.
               - `node -e 'console.log("😭".repeat(140))' | pbcopy`
               - Delete some things to demonstrate counting by two.
+              - Copy it, and try `pbpaste | wc -m`
             </aside>
           </section>
 
@@ -137,6 +141,8 @@
                 href="http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types-string-type">standard</a>!
             </p>
           </section>
+
+          <!-- What is a JavaScript String anyway? -->
 
           <section>
             <blockquote>
@@ -161,7 +167,6 @@
 
         </section>
 
-        <!-- What is a JavaScript String anyway? -->
 
         <section>
           <section>
@@ -171,8 +176,8 @@
           <section>
             <h1> What is Unicode? </h1>
             <ul>
-              <li class="fragment"> A list of numbers (<em>code points</em>) that map to each character. Ever. </li>
-              <li class="fragment"> Database of properties for each code point (e.g., name, general category). </li>
+              <li class="fragment"> A mapping of numbers (<em>code points</em>) to every character. Ever. </li>
+              <li class="fragment"> Database of properties for each character (e.g., name, general category). </li>
               <li class="fragment"> <del>a character encoding</del>
                 <span class="fragment"> It's several character encodings! </span>
               </li>
@@ -193,7 +198,7 @@
           </section>
 
           <section>
-            <h2> Code Points </h2>
+            <h2> <a href="http://unicode.org/glossary/#code_point"> Code Points </a> </h2>
             <p> Unique number given to each character </p>
             <!-- insert some example code points -->
 
@@ -208,26 +213,28 @@
 
 
           <section>
-            <h2> Code Unit </h2>
-            <p> One unit </p>
+            <h2> <a href="http://unicode.org/glossary/#code_unit">Code Unit</a> </h2>
+            <p> Smallest unit of storage required to store or transmit a single character in an encoding scheme </p>
           </section>
 
           <section>
             <h2> Ways of transmitting code points </h2>
 
             <ul>
-              <li class="fragment"> UTF-8 </li>
-              <li class="fragment"> UTF-16 </li>
+              <li class="fragment"> UCS-2 (Deprecated) </li>
             </ul>
 
             <p class="fragment"> <em>Later...</em> </p>
 
             <ul>
-              <li class="fragment"> UTF-7 </li>
+              <li class="fragment"> UTF-8 </li>
+              <li class="fragment"> UTF-16 </li>
               <li class="fragment"> UTF-32 </li>
             </ul>
 
             <aside class="notes" data-markdown>
+              - So each of these forms note how many bits make up one code
+                unit.
               - At this point, things should seem odd.
               - Why does UTF-32 exist, and why does JavaScript use UTF-16?
             </aside>
@@ -242,6 +249,9 @@
           <section>
             <h1> A tour of the Unicode character space! </h1>
           </section>
+
+          <!-- Characters are: Graphic, used for formatting (LF, ZWNJ), for
+          control (???), Private-use, Surrogate, Noncharacters, Reserved -->
 
           <section data-background="./img/some-astral-ass-shit.jpg">
             <h2 class="halo"> UTF-16 needs <strong>two code units</strong> to represent <strong>one astral code point</strong> </h2>
@@ -262,7 +272,7 @@
             <h2> Back to our problem... </h2>
             <p> We want to count
               <strong> code points </strong>
-              not
+              and not
               <strong> code units </strong>
             </p>
           </section>
@@ -293,21 +303,24 @@
           <section>
             <h2>Compare</h2>
             <pre><code data-trim>
-for (var i = 0; i &lt; str.length; i++) {
-  console.log(s[i]);
+for (var c of s) {
+  console.log(c);
 }
             </code></pre>
 
             <h3>vs.</h3>
 
             <pre><code data-trim>
-for (var c of s) {
-  console.log(c);
+for (var i = 0; i &lt; str.length; i++) {
+  console.log(s[i]);
 }
             </code></pre>
 
             <aside data-markdown class="notes">
-              - it's not just prettier; it iterates completely differently.
+              - it's not just neater; it iterates over completely different
+                things; the iterator gives you code points -- characters --
+                guaranteed! The C-style for-loop gives you 16-bit values, that
+                just usually happen to be code points.
             </aside>
           </section>
 
@@ -315,6 +328,73 @@ for (var c of s) {
             <h2> Let's fix our code! </h2>
 
             <p class="fragment"> Trick: Use <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.from">Array#from</a> </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1> Change of plans </h1>
+
+            <aside data-markdown class="notes">
+              - The CEO had a revelation, and it turns out that Bitter is too
+              similar to Twitter. Who would have thought? So, we're shifting
+              gears; we're gonna be a restaurant review site instead! (that
+              aren't any of those around, are there?)
+
+            </aside>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h1> Resources </h1>
+          </section>
+
+          <section>
+            <h2> Unicode </h2>
+
+            <ul>
+              <li>
+                <a href="https://www.youtube.com/watch?v=zi0w7J7MCrk">Mathias Bynens: JavaScript ♥ Unicode</a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=MijmeoH9LT4">Tom Scott: Characters, Symbols and the Unicode Miracle</a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=tITwM5GDIAI">Tom Scott: Emoji and the Levitating Businessman</a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=qOcxwRc2Epg">Tom Scott: Why You Can Tweet More In Japanese: What Counts As A Character? </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=3AtBE9BOvvk">Tom Scott: Real Life Emoji Keyboard!</a>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2> Standards </h2>
+            <ul>
+              <li>
+                <a href="www.unicode.org/versions/Unicode8.0.0/">Unicode Standard 8.0</a>
+              </li>
+              <li>
+                <a href="http://www.ecma-international.org/ecma-262/6.0/">ECMAScript 6</a>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2> Other </h2>
+            <ul>
+              <li>
+                <a href="http://utf8everywhere.org/">UTF-8 Everywhere</a>
+              </li>
+              <li>
+                <a href="https://mathiasbynens.be/notes/javascript-unicode">JavaScript has a Unicode problem</a>
+              </li>
+            </ul>
           </section>
         </section>
 
