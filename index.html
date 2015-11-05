@@ -211,6 +211,53 @@
             </div>
           </section>
 
+          <section>
+            <h1> A tour of the Unicode character space! </h1>
+            <p class="fragment"> Code points are divided into 17 <em> <a href="http://unicode.org/glossary/#plane">planes</a> </em> </p>
+          </section>
+
+          <!-- Characters are: Graphic, used for formatting (LF, ZWNJ), for
+          control (???), Private-use, Surrogate, Noncharacters, Reserved -->
+
+          <section>
+            <h2> The Basic Multilingual Plane </h2>
+            <ul>
+              <li class="fragment"> Plane 0 </li>
+              <li class="fragment"> Characters from practically all widely-used modern-day scripts </li>
+              <li class="fragment"> Code points are notated as <code>U+hhhh</code> </li>
+              <li class="fragment"> Code points range from <code>U+0000</code> <code>U+FFFF</code> </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2> The Basic Multilingual Plane </h2>
+            <img src="./img/Roadmap_to_Unicode_BMP.svg" alt="Map of the Basic Multilingual Plane">
+          </section>
+
+
+          <section>
+            <h2> The Astral Planes </h2>
+            <h3 class="fragment"> Weird 💩 </h3>
+            <ul>
+              <li class="fragment"> Planes 1-16 </li>
+              <li class="fragment"> Characters from ancient scripts, alternative scripts,
+                pictograms, and archaic/esoteric CJK ideograms. </li>
+              <li class="fragment"> Two entire planes devoted to <em>private use characters</em> </li>
+              <li class="fragment"> Code points are notated as <code>U+HHhhhh</code> </li>
+              <li class="fragment"> Code points range from <code>U+010000</code> <code>U+10FFFF</code> </li>
+              <li class="fragment"> <strong>You need 21 bits to store any given Unicode code point!</strong> </li>
+            </ul>
+          </section>
+
+          <section data-background="./img/some-astral-ass-shit.jpg">
+            <h2 class="halo"> UTF-16 needs <strong>two code units</strong> to represent <strong>one astral code point</strong> </h2>
+
+            <aside class="notes" data-markdown>
+              - UTF-16 does this through *surrogate pairs*, but let's just leave
+                that discussion for another time...
+              - There's that phrase again! "Code unit". What does that mean?
+            </aside>
+          </section>
 
           <section>
             <h2> <a href="http://unicode.org/glossary/#code_unit">Code Unit</a> </h2>
@@ -237,32 +284,6 @@
                 unit.
               - At this point, things should seem odd.
               - Why does UTF-32 exist, and why does JavaScript use UTF-16?
-            </aside>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h1> A tour of the Unicode character space! </h1>
-          </section>
-
-          <!-- Characters are: Graphic, used for formatting (LF, ZWNJ), for
-          control (???), Private-use, Surrogate, Noncharacters, Reserved -->
-
-          <section>
-            BMP + Weird 💩
-          </section>
-
-          <section>
-            <h2> It requires 21 bits to store any given Unicode code point </h2>
-          </section>
-
-          <section data-background="./img/some-astral-ass-shit.jpg">
-            <h2 class="halo"> UTF-16 needs <strong>two code units</strong> to represent <strong>one astral code point</strong> </h2>
-
-            <aside class="notes" data-markdown>
-              - UTF-16 does this through *surrogate pairs*, but let's just leave
-                that discussion for another time...
             </aside>
           </section>
         </section>
@@ -303,22 +324,24 @@
           <section>
             <h2>Compare</h2>
             <pre><code data-trim>
-for (var c of s) {
-  console.log(c);
+let a = [];
+for (let c of s) {
+  a.push(c);
 }
             </code></pre>
 
             <h3>vs.</h3>
 
             <pre><code data-trim>
-for (var i = 0; i &lt; str.length; i++) {
-  console.log(s[i]);
+let a = [];
+for (let i = 0; i &lt; s.length; i++) {
+  a.push(s[i]);
 }
             </code></pre>
 
             <aside data-markdown class="notes">
               - it's not just neater; it iterates over completely different
-                things; the iterator gives you code points -- characters --
+                things! The iterator gives you code points -- characters --
                 guaranteed! The C-style for-loop gives you 16-bit values, that
                 just usually happen to be code points.
             </aside>
@@ -354,6 +377,15 @@ for (var i = 0; i &lt; str.length; i++) {
 
         <section>
           <section>
+            <h2> Three different ways of writing 🍲 </h2>
+            <ul>
+              <li>phở <!-- use NFC character... my font renders it wrong --> <span class="fragment"> = <strong>o + ◌̛ + ◌̉</strong> </span></li>
+              <li>phở <span class="fragment"> = <strong>ơ + ◌̉</strong> </span></li>
+              <li>phở <span class="fragment"> = <strong>ở</strong> </span></li>
+            </ul>
+          </section>
+
+          <section>
             <p> There are multiple ways of representing the same
               <em>abstract</em> character sequence </p>
           </section>
@@ -385,16 +417,8 @@ for (var i = 0; i &lt; str.length; i++) {
                 (usually accents) in a "canonical" order.
               - Then there's NFC, which is just like NFD, except it pieces
                 those combining characters back together again.
+              - So many words! Which one is useful?
             </aside>
-          </section>
-
-          <section>
-            <h2> Three different ways of writing 🍲 </h2>
-            <ul>
-              <li>phở <!-- use NFC character... my font renders it wrong --> <span class="fragment"> = <strong>o + ◌̛ + ◌̉</strong> </span></li>
-              <li>phở <span class="fragment"> = <strong>ơ + ◌̉</strong> </span></li>
-              <li>phở <span class="fragment"> = <strong>ở</strong> </span></li>
-            </ul>
           </section>
 
           <section>
@@ -402,8 +426,8 @@ for (var i = 0; i &lt; str.length; i++) {
             <h3><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.normalize"><code>String.prototype.normalize()</code></a></h3>
 
             <aside class="notes" data-markdown>
-              - That's why ES6 introduced String.normalize()
-              - Can convert into any of the four abou
+              - That's why ES6 introduced String#normalize()
+              - Can convert into any of the four normalization forms.
               - **NOT** available in Core.JS, though modern browsers (such as
                 Chrome, FireFox, and Edge [but not Safari :c]) provided it built-in.
             </aside>
@@ -417,28 +441,51 @@ for (var i = 0; i &lt; str.length; i++) {
 
             <aside class="notes" data-markdown>
               - When in doubt, use NFC.
-              - Twitter uses it, even its input thing doesn't.
               - In fact, if you provide no argument to String.normalize(),
                 it does NFC by default.
-              - The one for String iterates through code points!
+              - It gives you one character for any accented non-sense for
+                which that makes sense.
+              - Twitter uses it internally, even if its character counter doesn't.
             </aside>
+          </section>
+
+          <section>
+            <h2> Caveat: </h2>
+            <p> Not available in Safari </p>
+            <p> Not available in core.js </p>
+            <p> Check the <a href="https://kangax.github.io/compat-table/es6/#test-String.prototype_methods">compatibility table</a> for more details! </p>
           </section>
         </section>
 
         <section>
           <section>
-            <h1> Footnotes </h1>
+            <h1> Odds & Ends </h1>
           </section>
 
           <section>
             <h2> Regexes </h2>
+
+            <pre><code data-trim>
+'🍉'.match(/[🍅-🍓]/) // => false
+            </code></pre>
+
+            <div class="fragment">
+              <h3>vs.</h3>
+              <pre><code data-trim>
+'🍉'.match(/[🍅-🍓]/u) // => true
+              </code></pre>
+            </div>
+
+            <p class="fragment">
+              <strong> Poorly supported! </strong>
+            </p>
           </section>
 
           <section>
             <h2> Astral code point escape </h2>
 
             <li class="fragment"> to escape a BMP character: <code>"\u0CA0"</code> = ಠ </li>
-            <li class="fragment"> to escape a non-BMP character: <code>"\u{10085}"</code> = 𐂅  </li>
+            <li class="fragment"> to escape a non-BMP character: <code>"\u{10305}"</code> = 𐌅 </li>
           </section>
 
           <section>
@@ -448,10 +495,10 @@ for (var i = 0; i &lt; str.length; i++) {
 
           <section>
             <h2> Identifiers </h2>
-            <p> (Variable names) </p>
+            <p> (A.K.A., variable names) </p>
 
             <p class="fragment"> <a href="http://www.unicode.org/reports/tr31/">UAX #31</a> defines what a character is </p>
-            <p class="fragment"> <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-identifier-names-static-semantics-early-errors">The standard</a> adds "$", "_" to this definition. </p>
+            <p class="fragment"> <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-names-and-keywords">The standard</a> adds <code>$</code> and <code>_</code> to this definition. </p>
 
             <p class="fragment"> <a href="https://mothereff.in/js-variables"> ES6 variable name validator </a> </p>
           </section>
