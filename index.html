@@ -50,6 +50,10 @@
         color: black;
         text-shadow: -0.1em -0.1em 1em rgba(255,255,255,1), 1em 0 1em rgba(255,255,255,1), -0.1em 0 1em rgba(255,255,255,1), -0.3em 0.3em 1em rgba(255,255,255,1), -0.3em -0.1em 1em rgba(255,255,255,1);
       }
+
+      span.decomp {
+        font: bold 100% Arial Unicode MS, sans-serif;
+      }
     </style>
 
     <!--[if lt IE 9]>
@@ -333,8 +337,8 @@ for (let c of s) {
             <h3>vs.</h3>
 
             <pre><code data-trim>
-let a = [];
-for (let i = 0; i &lt; s.length; i++) {
+var i, a = [],
+for (i = 0; i &lt; s.length; i++) {
   a.push(s[i]);
 }
             </code></pre>
@@ -373,15 +377,19 @@ for (let i = 0; i &lt; s.length; i++) {
               <small> (Thanks, <a href="http://kimber.github.io/">Kim</a>!) </small>
             </p>
           </section>
+
+          <section>
+            <h2> (demo) </h2>
+          </section>
         </section>
 
         <section>
           <section>
             <h2> Three different ways of writing 🍲 </h2>
             <ul>
-              <li>phở <!-- use NFC character... my font renders it wrong --> <span class="fragment"> = <strong>o + ◌̛ + ◌̉</strong> </span></li>
-              <li>phở <span class="fragment"> = <strong>ơ + ◌̉</strong> </span></li>
-              <li>phở <span class="fragment"> = <strong>ở</strong> </span></li>
+              <li>phở <!-- use NFC character... my font renders it wrong --> <span class="fragment"> = <span class="decomp">o + ◌̛ + ◌̉</span> </span></li>
+              <li>phở <span class="fragment"> = <span class="decomp">ơ + ◌̉</strong> </span></li>
+              <li>phở <span class="fragment"> = <span class="decomp">ở</span> </span></li>
             </ul>
           </section>
 
@@ -431,8 +439,6 @@ for (let i = 0; i &lt; s.length; i++) {
               - **NOT** available in Core.JS, though modern browsers (such as
                 Chrome, FireFox, and Edge [but not Safari :c]) provided it built-in.
             </aside>
-
-            <!-- TODO: ES6 compat table. -->
           </section>
 
           <section>
@@ -486,6 +492,8 @@ for (let i = 0; i &lt; s.length; i++) {
 
             <li class="fragment"> to escape a BMP character: <code>"\u0CA0"</code> = ಠ </li>
             <li class="fragment"> to escape a non-BMP character: <code>"\u{10305}"</code> = 𐌅 </li>
+            <!-- TODO: change this with supplementary ideographic plane
+              character. -->
           </section>
 
           <section>
