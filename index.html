@@ -54,6 +54,26 @@
       span.decomp {
         font: bold 100% Arial Unicode MS, sans-serif;
       }
+
+      /* Makes citatation smaller and italic. */
+      .reveal cite {
+        font-size: smaller;
+        font-style: italic;
+      }
+
+      /* Horribly hacky things for big ol' unicode diagram. */
+      img.fragment.highlight-blue.unicode-graph {
+        box-shadow: none;
+        border: 0;
+
+        /* Scale and translation stuff -- hand-tweaked values. */
+        transform: scale(2.5) translateX(37.5%);
+        transform-origin: top center;
+      }
+
+      img.fragment.highlight-blue.unicode-graph.visible.current-fragment {
+        transform: scale(0.5);
+      }
     </style>
 
     <!--[if lt IE 9]>
@@ -115,19 +135,26 @@
               - So this app is called Bitter.
               - It allows you to post short, 140 character long messages.
               - Pretty simple, right?
-              - I mean, we have feelings too, but with the right app, our
-              animated gif will resemble this instead:
+              - I mean, we have feelings too, but we hope to
+                find... alternate... coping mechanisms.
             </aside>
 
           <section data-background="./img/feelings-money.gif">
             <aside class="notes" data-markdown>
               - With that in mind, let's code it!
+
+              ###### INSTRUCTIONS FOR EDDIE
+
               - Ensure Bitter is loaded in a browser window
-              - Ensure src/index.jsx is loaded in Vim
+              - Ensure src/index.jsx is loaded in Vim, WITHOUT the message
+                length code (have it let message length = 0)
               - Demo the app -- type some stuff in it.
+              - Add string.length to message length.
+              - Demo the app -- type some stuff in it. The character count
+                should increase by 1.
               - `node -e 'console.log("😭".repeat(140))' | pbcopy`
-              - Delete some things to demonstrate counting by two.
               - Copy it, and try `pbpaste | wc -m`
+              - Delete some things to demonstrate counting by two.
             </aside>
           </section>
 
@@ -152,17 +179,30 @@
             <blockquote>
               <p> The String type is the set of all ordered sequences of zero
                 or more <strong>16-bit unsigned integer values</strong>
-                (“elements”) ...
+                (“elements”)
+              </blockquote>
 
-              <p class="fragment">The String type is generally used to
+            <blockquote class="fragment">
+              <p>The String type is generally used to
                 represent textual data in a running ECMAScript program, in
                 which case each element in the String is treated as a
                 <strong>UTF-16 code unit</strong> value.
-
-              <p class="fragment"> The length of a String is the
-                <strong>number</strong> of elements (i.e., <strong>16-bit
-                  values</strong>) within it.</p>
               </blockquote>
+
+            <div class="fragment">
+              <blockquote>
+                <p> The length of a String is the
+                  <strong>number</strong> of elements (i.e., <strong>16-bit
+                    values</strong>) within it.</p>
+              </blockquote>
+
+              <cite>
+              <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types-string-type">
+                ECMAScript 6.0 Standard §6.1.4</a>
+              </cite>
+            </div>
+
+
             </section>
 
           <section>
@@ -180,12 +220,8 @@
           <section>
             <h1> What is Unicode? </h1>
             <ul>
-              <li class="fragment"> A mapping of numbers (<em>code points</em>) to every character. Ever. </li>
+              <li class="fragment"> A mapping of numbers (<em>code points</em>) to every character. <span class="fragment">Ever.</span> </li>
               <li class="fragment"> Database of properties for each character (e.g., name, general category). </li>
-              <li class="fragment"> <del>a character encoding</del>
-                <span class="fragment"> It's several character encodings! </span>
-              </li>
-              <li class="fragment"> a consortium! </li>
             </ul>
             <aside class="notes" data-markdown>
               - Unicode is a lot of things.
@@ -200,6 +236,17 @@
                 including UTF-8, and what JavaScript uses, UTF-16.
             </aside>
           </section>
+
+          <!-- INSERT: EXAMPLE OF CHARACTERS! -->
+
+          <!--
+            Something: east asian,
+                        kannada ttha,
+                        canadian aborginal symbols,
+                        weird notation (APL?),
+                        dumb emoji,
+                        an english letter
+          -->
 
           <section>
             <h2> <a href="http://unicode.org/glossary/#code_point"> Code Points </a> </h2>
@@ -223,13 +270,15 @@
           <!-- Characters are: Graphic, used for formatting (LF, ZWNJ), for
           control (???), Private-use, Surrogate, Noncharacters, Reserved -->
 
+          <!-- Maybe I should add the full plane here? -->
+
           <section>
             <h2> The Basic Multilingual Plane </h2>
             <ul>
               <li class="fragment"> Plane 0 </li>
               <li class="fragment"> Characters from practically all widely-used modern-day scripts </li>
               <li class="fragment"> Code points are notated as <code>U+hhhh</code> </li>
-              <li class="fragment"> Code points range from <code>U+0000</code> <code>U+FFFF</code> </li>
+              <li class="fragment"> Code points range from <code>U+0000</code> to <code>U+FFFF</code> </li>
             </ul>
           </section>
 
@@ -238,6 +287,14 @@
             <img src="./img/Roadmap_to_Unicode_BMP.svg" alt="Map of the Basic Multilingual Plane">
           </section>
 
+          <section>
+            <h2> All Unicode Code Points </h2>
+            <!-- Hack! highlight-blue class indicates the figure should zoom. -->
+            <img class="fragment highlight-blue unicode-graph" src="./img/full-unicode.svg" alt="Diagram of all 17 Unicode planes">
+          </section>
+
+
+          <!--
 
           <section>
             <h2> The Astral Planes </h2>
@@ -252,6 +309,7 @@
               <li class="fragment"> <strong>You need 21 bits to store any given Unicode code point!</strong> </li>
             </ul>
           </section>
+          -->
 
           <section data-background="./img/some-astral-ass-shit.jpg">
             <h2 class="halo"> UTF-16 needs <strong>two code units</strong> to represent <strong>one astral code point</strong> </h2>
@@ -269,18 +327,24 @@
           </section>
 
           <section>
-            <h2> Ways of transmitting code points </h2>
-
+            <h1> What is <em>not</em> Unicode? </h1>
             <ul>
-              <li class="fragment"> UCS-2 (Deprecated) </li>
+              <li class="fragment"> <del>a character encoding</del>
+                <span class="fragment"> It's several character encodings! </span>
+              </li>
             </ul>
+            <aside class="notes" data-markdown>
+              - Oh no, character encodings!
+            </aside>
+          </section>
 
-            <p class="fragment"> <em>Later...</em> </p>
+          <section>
+            <h2> Ways of transmitting code points </h2>
 
             <ul class="fragment">
               <li> UTF-8 </li>
               <li> UTF-16 </li>
-              <li> UTF-32 </li>
+              <li> UTF-32/UCS-4 </li>
             </ul>
 
             <aside class="notes" data-markdown>
