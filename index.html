@@ -248,8 +248,9 @@
                 including UTF-8, and what JavaScript uses, UTF-16.
             </aside>
           </section>
+        </section>
 
-          <!-- INSERT: EXAMPLE OF CHARACTERS! -->
+        <section>
           <section>
             <h3> It's time to play </h3>
             <h2 class="fragment">Is <span class="fragment">that</span></h2>
@@ -287,8 +288,8 @@
               <div class="code-point"> U+20158 </div>
               <div class="unicode-name">CJK UNIFIED IDEOGRAPH-20158</div>
             </div>
+            <p class="fragment"> <i>(Variant of modern</i> 亭 U+4EAD<i>)</i>
           </section>
-
 
           <section>
             <h1 class="display-character">
@@ -322,6 +323,7 @@
               <div class="unicode-name">LATIN CAPITAL LETTER J</div>
             </div>
           </section>
+        </section>
 
           <section>
             <h2> <a href="http://unicode.org/glossary/#code_point"> Code Points </a> </h2>
@@ -345,11 +347,6 @@
             <p class="fragment"> Code points are divided into 17 <em> <a href="http://unicode.org/glossary/#plane">planes</a> </em> </p>
           </section>
 
-          <!-- Characters are: Graphic, used for formatting (LF, ZWNJ), for
-          control (???), Private-use, Surrogate, Noncharacters, Reserved -->
-
-          <!-- Maybe I should add the full plane here? -->
-
           <section>
             <h2> The Basic Multilingual Plane </h2>
             <img src="./img/Roadmap_to_Unicode_BMP.svg" alt="Map of the Basic Multilingual Plane">
@@ -371,49 +368,36 @@
             <img class="fragment highlight-blue unicode-graph" src="./img/full-unicode.svg" alt="Diagram of all 17 Unicode planes">
           </section>
 
-
-          <!--
-
           <section>
             <h2> The Astral Planes </h2>
-            <h3 class="fragment"> Weird 💩 </h3>
             <ul>
-              <li class="fragment"> Planes 1-16 </li>
+              <li class="fragment"> Everything else (Planes 1-16) </li>
               <li class="fragment"> Characters from ancient scripts, alternative scripts,
-                pictograms, and archaic/esoteric CJK ideograms. </li>
+                pictograms, and rare and archaic CJK(V) ideograms (Chinese-style
+                  characters). <span
+                  class="fragment"> Also, (most) Emoji. </span> </li>
               <li class="fragment"> Two entire planes devoted to <em>private use characters</em> </li>
-              <li class="fragment"> Code points are notated as <code>U+HHhhhh</code> </li>
-              <li class="fragment"> Code points range from <code>U+010000</code> <code>U+10FFFF</code> </li>
-              <li class="fragment"> <strong>You need 21 bits to store any given Unicode code point!</strong> </li>
+              <li class="fragment"> Code points are notated as <strong><code>U+<span class="placeholder">hhhhhh</span></code></strong> </li>
+              <li class="fragment"> Code points range from <code>U+010000</code> to <code>U+10FFFF</code> </li>
             </ul>
           </section>
-          -->
 
-          <section data-background="./img/some-astral-ass-shit.jpg">
-            <h2 class="halo"> UTF-16 needs <strong>two code units</strong> to represent <strong>one astral code point</strong> </h2>
-
+          <section>
+            <!-- HACK: two non-breaking spaces to deal with kerning... -->
+            <h1> What is <em>not</em>&nbsp;&nbsp;Unicode? </h1>
+            <ul>
+              <li class="fragment"> <del>a character encoding</del>
+                <span class="fragment"> It's several character encodings! </span>
+              <li class="fragment"> Code points ≠ Bytes
+            </ul>
             <aside class="notes" data-markdown>
-              - UTF-16 does this through *surrogate pairs*, but let's just leave
-                that discussion for another time...
-              - There's that phrase again! "Code unit". What does that mean?
+              - Oh no, character encodings!
             </aside>
           </section>
 
           <section>
             <h2> <a href="http://unicode.org/glossary/#code_unit">Code Unit</a> </h2>
             <p> Smallest unit of storage required to store or transmit a single character in an encoding scheme </p>
-          </section>
-
-          <section>
-            <h1> What is <em>not</em> Unicode? </h1>
-            <ul>
-              <li class="fragment"> <del>a character encoding</del>
-                <span class="fragment"> It's several character encodings! </span>
-              </li>
-            </ul>
-            <aside class="notes" data-markdown>
-              - Oh no, character encodings!
-            </aside>
           </section>
 
           <section>
@@ -432,6 +416,17 @@
               - Why does UTF-32 exist, and why does JavaScript use UTF-16?
             </aside>
           </section>
+
+          <section data-background="./img/some-astral-ass-shit.jpg">
+            <h2 class="halo"> UTF-16 needs <strong>two code units</strong> to represent <strong>one astral code point</strong> </h2>
+
+            <aside class="notes" data-markdown>
+              - UTF-16 does this through *surrogate pairs*, but let's just leave
+                that discussion for another time...
+              - There's that phrase again! "Code unit". What does that mean?
+            </aside>
+          </section>
+
         </section>
 
         <section>
