@@ -74,6 +74,18 @@
       img.fragment.highlight-blue.unicode-graph.visible.current-fragment {
         transform: scale(0.5);
       }
+
+      /* Unicode stuff. */
+      h1.display-character {
+        text-transform: none;
+        /* Makes Chrome render this in a sane way. */
+        font-family: monospace;
+      }
+
+      /* Make the hhhh placeholder thing. */
+      span.placeholder {
+        font-style: italic;
+      }
     </style>
 
     <!--[if lt IE 9]>
@@ -238,22 +250,76 @@
           </section>
 
           <!-- INSERT: EXAMPLE OF CHARACTERS! -->
+          <section>
+            <h3> It's time to play </h3>
+            <h2 class="fragment">Is <span class="fragment">that</span></h2>
+            <h1 class="fragment">⛎ℕι⊂◎ ₫ℇ?</h1>
+          </section>
 
-          <!--
-            Something: east asian,
-                        kannada ttha,
-                        canadian aborginal symbols,
-                        weird notation (APL?),
-                        dumb emoji,
-                        an english letter
-          -->
+          <section>
+            <h1 class="display-character">
+              ß
+            </h1>
+
+            <div class="fragment">
+              <div class="code-point"> U+00DF </div>
+              <div class="unicode-name"> LATIN SMALL LETTER SHARP S </div>
+            </div>
+          </section>
+
+          <section>
+            <h1 class="display-character">
+              ಠ
+            </h1>
+
+            <div class="fragment">
+              <div class="code-point"> U+0CA0 </div>
+              <div class="unicode-name"> KANNADA LETTER TTHA </div>
+            </div>
+          </section>
+
+          <section>
+            <h1 class="display-character">
+              ᑿ
+            </h1>
+
+            <div class="fragment">
+              <div class="code-point">U+147F</div>
+              <div class="unicode-name"> CANADIAN SYLLABICS WEST-CREE KWA</div>
+            </div>
+          </section>
+
+          <section>
+            <h1 class="display-character">
+              🗿
+            </h1>
+
+            <div class="fragment">
+              <div class="code-point">U+1F5FF</div>
+              <div class="unicode-name">MOYAI</div>
+            </div>
+          </section>
+
+          <section>
+            <h1 class="display-character">
+              J
+            </h1>
+
+            <div class="fragment">
+              <div class="code-point">U+004A</div>
+              <div class="unicode-name">LATIN CAPITAL LETTER J</div>
+            </div>
+          </section>
 
           <section>
             <h2> <a href="http://unicode.org/glossary/#code_point"> Code Points </a> </h2>
             <p> Unique number given to each character </p>
             <!-- insert some example code points -->
 
-            <p class="fragment"> Range from 0 to 10FFFF<sub>16</sub> </p>
+            <p class="fragment"> They look like this: </p>
+            <p class="fragment"> U+<span class="placeholder">hhhh</span> or U+<span class="placeholder">hhhhhh</span> </p>
+
+            <p class="fragment"> Range from <strong>U+0000</strong> to <strong>U+10FFFF</strong> </p>
 
             <div class="fragment">
               <p> 1,114,112 code points available in total </p>
@@ -274,17 +340,17 @@
 
           <section>
             <h2> The Basic Multilingual Plane </h2>
-            <ul>
-              <li class="fragment"> Plane 0 </li>
-              <li class="fragment"> Characters from practically all widely-used modern-day scripts </li>
-              <li class="fragment"> Code points are notated as <code>U+hhhh</code> </li>
-              <li class="fragment"> Code points range from <code>U+0000</code> to <code>U+FFFF</code> </li>
-            </ul>
+            <img src="./img/Roadmap_to_Unicode_BMP.svg" alt="Map of the Basic Multilingual Plane">
           </section>
 
           <section>
             <h2> The Basic Multilingual Plane </h2>
-            <img src="./img/Roadmap_to_Unicode_BMP.svg" alt="Map of the Basic Multilingual Plane">
+            <h3> (Plane 0) </h3>
+            <ul>
+              <li class="fragment"> Characters from practically all widely-used modern-day scripts </li>
+              <li class="fragment"> Code points are notated as <code>U+hhhh</code> </li>
+              <li class="fragment"> Code points range from <code>U+0000</code> to <code>U+FFFF</code> </li>
+            </ul>
           </section>
 
           <section>
