@@ -158,13 +158,14 @@
               ###### INSTRUCTIONS FOR EDDIE
 
               - Ensure Bitter is loaded in a browser window
-              - Ensure src/index.jsx is loaded in Vim, WITHOUT the message
+              - Ensure branch is `master`
+              - Ensure src/index.jsx is loaded in Vim
                 length code (have it let message length = 0)
-              - Demo the app -- type some stuff in it.
+              - Demo the app -- type some English in it.
               - Add string.length to message length.
               - Demo the app -- type some stuff in it. The character count
                 should increase by 1.
-              - `node -e 'console.log("😭".repeat(140))' | pbcopy`
+              - `node -p '"😭".repeat(140)' | pbcopy`
               - Copy it, and try `pbpaste | wc -m`
               - Delete some things to demonstrate counting by two.
             </aside>
@@ -172,17 +173,29 @@
 
           <section>
             <h2> (demo) </h2>
+
+            <aside class="notes" data-markdown>
+              ###### INSTRUCTIONS FOR EDDIE
+               - Demo the app. Write naïve, implementation.
+            </aside>
           </section>
         </section>
 
         <section>
           <section>
             <h2>
-               What does <code>str.length</code> actually measure?
+               What does <code>String.length</code> actually measure?
             </h2>
             <p class="fragment"> Let's consult the <a
                 href="http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types-string-type">standard</a>!
             </p>
+
+            <aside class="notes" data-markdown>
+              So what does String.length actually measure, if it's not
+              characters?
+
+              Let's consult the ECMAScript 6 standard!
+            </aside>
           </section>
 
           <!-- What is a JavaScript String anyway? -->
@@ -214,11 +227,24 @@
               </cite>
             </div>
 
+            <aside class="notes" data-markdown>
+              A string is an ordered sequence of 16-bit unsigned integer
+              values...
 
-            </section>
+              Strings are generally used to represent text, in which case
+              each element is treated as a UTF-16 code unit value.
+
+              The length of a string is the number of 16-bit values within it.
+            </aside>
+
+          </section>
 
           <section>
-            <h2> What the 👿 is a UTF-16 code value‽ </h2>
+            <h2> What the 👿 is a UTF-16 code unit value‽ </h2>
+
+            <aside class="notes" data-markdown>
+              WHAT THE DINK IS A UTF-16 CODE UNIT VALUE???!?!??!??!?
+            </aside>
           </section>
 
         </section>
@@ -235,17 +261,17 @@
               <li class="fragment"> A mapping of numbers (<em>code points</em>) to every character. <span class="fragment">Ever.</span> </li>
               <li class="fragment"> Database of properties for each character (e.g., name, general category). </li>
             </ul>
+
             <aside class="notes" data-markdown>
               - Unicode is a lot of things.
-              - It's the database of characters (among other things).
+              - It's a big database assigning a number to every character used
+                in human language. Ever.
+              - Each character is also assigned with a number of properties,
+                including a unique name.
               - Characters are abstract representations of the smallest units
                 of written semantic value in written language
                 [Unicode:3](http://www.unicode.org/versions/Unicode8.0.0/ch02.pdf).
-              - If you're dealing with text, you're most likely dealing with Unicode
-              - Unicode is NOT a character encodings. That is, Unicode does
-                not specify a single way to turn code points into binary for
-                transmission, and storage. It defines several such formats,
-                including UTF-8, and what JavaScript uses, UTF-16.
+              - If you're dealing with text of any sort, you're probably dealing with Unicode
             </aside>
           </section>
         </section>
@@ -255,6 +281,13 @@
             <h3> It's time to play </h3>
             <h2 class="fragment">Is <span class="fragment">that</span></h2>
             <h1 class="fragment">⛎ℕι⊂◎ ₫ℇ?</h1>
+
+            <aside class="notes" data-markdown>
+              - It's time to play...
+              - IS
+              - THAT
+              - UNICODE?!?!?!?!?
+            </aside>
           </section>
 
           <section>
@@ -352,16 +385,34 @@
 
               <p> <small>(See <a href="http://www.unicode.org/versions/Unicode8.0.0/ch02.pdf">Unicode Chapter 3</a>)</small> </p>
             </div>
+
+            <aside class="notes" data-markdown>
+              - Code points are unique numbers assigned to each character.
+              - They're written as four hexadecimal characters or six
+                hexadecimal character, with that funky `U+` prefix.
+            </aside>
           </section>
 
           <section>
             <h1> A tour of the Unicode character space! </h1>
             <p class="fragment"> Code points are divided into 17 <em> <a href="http://unicode.org/glossary/#plane">planes</a> </em> </p>
+
+            <aside class="notes" data-markdown>
+              - Let's take a quick tour of the unicode code space!
+              - The range is divided into 17 planes
+            </aside>
           </section>
 
           <section>
             <h2> The Basic Multilingual Plane </h2>
             <img src="./img/Roadmap_to_Unicode_BMP.svg" alt="Map of the Basic Multilingual Plane">
+
+            <aside class="notes" data-markdown>
+              - Most of the characters used in today's languages are here, in
+              the Basic Multilingual Plane.
+              - English, Standard Chinese, Cherokee, Hindi, Russian, Hebrew,
+                Ethiopian—everything! It's in here.
+            </aside>
           </section>
 
           <section>
@@ -372,12 +423,23 @@
               <li class="fragment"> Code points are notated as <code>U+<span class="placeholder">hhhh</span></code> </li>
               <li class="fragment"> Code points range from <strong><code>U+0000</code></strong> to <strong><code>U+FFFF</code></strong> </li>
             </ul>
+
+            <aside class="notes" data-markdown>
+              - The characters are notated using four hexadecimal characters.
+              - But this is just 1/17th of the possible Unicode characters...
+            </aside>
           </section>
 
           <section>
             <h2> All Unicode Code Points </h2>
             <!-- Hack! highlight-blue class indicates the figure should zoom. -->
             <img class="fragment highlight-blue unicode-graph" src="./img/full-unicode.svg" alt="Diagram of all 17 Unicode planes">
+
+            <aside class="notes" data-markdown>
+              - Here's the basic multilingual plane...
+              - And here's where it lies in the entire Unicode!
+              - The non-BMP planes are called *astral planes*
+            </aside>
           </section>
 
           <section>
@@ -392,6 +454,19 @@
               <li class="fragment"> Code points are notated as <strong><code>U+<span class="placeholder">hhhhhh</span></code></strong> </li>
               <li class="fragment"> Code points range from <code>U+010000</code> to <code>U+10FFFF</code> </li>
             </ul>
+
+            <aside class="notes" data-markdown>
+              - So if the Basic Multilingual Plane contains all the characters
+                for modern day scripts, what's in the astral planes?
+              - Characters from ancient scripts, alternative scripts for
+              writing modern day languages (there are at least two
+              alternatives for writing English alone!), and rare and archaic
+              CJK ideograms, or Chinese-style characters.
+              - And oh yeah, most Emoji live here too.
+              - There are also two planes that are assigned to private-use
+              characters—characters you, yes *you*, can use for anything!
+              - These code points are notated with 6 hexadecimal characters!
+            </aside>
           </section>
 
           <section>
@@ -402,14 +477,29 @@
                 <span class="fragment"> It's several character encodings! </span>
               <li class="fragment"> Code points ≠ Bytes
             </ul>
+
             <aside class="notes" data-markdown>
-              - Oh no, character encodings!
+              - Now, it's important to talk about what Unicode is *not*.
+              - It's not a character encoding. 
+              - It's several character encodings.
+              - We need character encodings to convert characters into bytes.
+              - It's important to note that one character does not mean one
+              byte.
             </aside>
           </section>
 
           <section>
             <h2> <a href="http://unicode.org/glossary/#code_unit">Code Unit</a> </h2>
             <p> Smallest unit of storage required to store or transmit a single character in an encoding scheme </p>
+
+            <aside class="notes" data-markdown>
+              - That brings us to the term "code unit"
+              - Remember back when we were reading the ES6 spec, it talked
+              about UTF-16 code unit values?
+              - Code units are the smallest unit of storage required to store
+              or transmit a single Unicode code point in any given encoding
+              format.
+            </aside>
           </section>
 
           <section>
@@ -422,10 +512,14 @@
             </ul>
 
             <aside class="notes" data-markdown>
-              - So each of these forms note how many bits make up one code
-                unit.
+              - You've probably heard of UTF-8, whose smallest unit is 8-bits.
+                There's also UTF-16, whose smallest unit uses 16-bits. And
+                there's UTF-32, in which all units are 32-bits long.
               - At this point, things should seem odd.
-              - Why does UTF-32 exist, and why does JavaScript use UTF-16?
+              - Why... does UTF-32 have to even exist?
+              - The astute among you have already noticed that astral code
+                points... need more than 16-bits to be represented.
+              - Thus...
             </aside>
           </section>
 
@@ -433,9 +527,10 @@
             <h2 class="halo"> UTF-16 needs <strong>two code units</strong> to represent <strong>one astral code point</strong> </h2>
 
             <aside class="notes" data-markdown>
+              - UTF-16 (that thing that JavaScript uses) needs two code units
+                to represent a single astral code point. Like a poop emoji.
               - UTF-16 does this through *surrogate pairs*, but let's just leave
                 that discussion for another time...
-              - There's that phrase again! "Code unit". What does that mean?
             </aside>
           </section>
 
@@ -460,7 +555,7 @@
             </p>
 
             <aside class="notes" data-markdown>
-              - among the slew of new features ES6 introduced are iterators
+              - Among the slew of features ES6 introduced are iterators
               - The one for String iterates through code points!
             </aside>
           </section>
