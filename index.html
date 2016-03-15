@@ -325,6 +325,7 @@
           </section>
         </section>
 
+        <section>
           <section>
             <h2> <a href="http://unicode.org/glossary/#code_point"> Code Points </a> </h2>
             <p> Unique number given to each character </p>
@@ -492,6 +493,19 @@ for (i = 0; i &lt; s.length; i++) {
             <h2> Let's fix our code! </h2>
 
             <p class="fragment"> Trick: Use <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.from">Array#from</a> </p>
+
+            <span class="fragment">
+              (it just does this:)
+              <pre><code data-trim>
+function (s) {
+  let array = [];
+  for (let c of s) {
+    a.push(c);
+  }
+  return a;
+}
+            </code></pre>
+          </span>
           </section>
         </section>
 
