@@ -480,7 +480,7 @@
 
             <aside class="notes" data-markdown>
               - Now, it's important to talk about what Unicode is *not*.
-              - It's not a character encoding. 
+              - It's not a character encoding.
               - It's several character encodings.
               - We need character encodings to convert characters into bytes.
               - It's important to note that one character does not mean one
@@ -637,6 +637,15 @@ function (s) {
 
           <section>
             <h2> (demo) </h2>
+
+            <aside class="notes" data-markdown>
+              ###### INSTRUCTIONS FOR EDDIE
+               - Stash changes, switch to branch "food"
+               - Demo the app; talk about phở
+               - search for "pho" and be surprised.
+               - The reason this is surprising is because there are actually
+                 three ways to write phở!
+            </aside>
           </section>
         </section>
 
@@ -644,15 +653,30 @@ function (s) {
           <section>
             <h2> Three different ways of writing 🍲 </h2>
             <ul>
-              <li>phở <!-- use NFC character... my font renders it wrong --> <span class="fragment"> = <span class="decomp">o + ◌̛ + ◌̉</span> </span></li>
+              <li>phở <!-- <- uses NFC character... my font renders decomposed wrong --> <span class="fragment"> = <span class="decomp">o + ◌̛ + ◌̉</span> </span></li>
               <li>phở <span class="fragment"> = <span class="decomp">ơ + ◌̉</strong> </span></li>
               <li>phở <span class="fragment"> = <span class="decomp">ở</span> </span></li>
             </ul>
+
+            <aside class="notes" data-markdown>
+               - There's one way where the charater is the o, the horn thingy,
+               and the question mark thing on top
+               - Then there's a way in which the o with the horn is ONE code
+               point, plus a combining hook
+               - Then there's just one code point that's an o with a horn and a
+                hook...
+            </aside>
           </section>
 
           <section>
             <p> There are multiple ways of representing the same
               <em>abstract</em> character sequence </p>
+
+            <aside class="notes" data-markdown>
+               - The lesson is, there are sometimes multiple ways of
+               representing a character sequence in Unicode
+               - Then how can we account for variation when searching text?
+            </aside>
           </section>
 
           <section>
@@ -660,6 +684,12 @@ function (s) {
 
             <p> Useful for comparing <em>different representations</em> of the same
               abstract character sequence </p>
+
+            <aside class="notes" data-markdown>
+               - This is where unicode NORMALIZATION saves the day!
+               - It allows you to compare different variations
+                 of the same character sequence, transparently!
+            </aside>
           </section>
 
           <section>
@@ -687,11 +717,21 @@ function (s) {
           </section>
 
           <section>
-            <h2> Canonical Composition </h2>
+            <h2> Canonical (De)composition </h2>
             <ul>
               <li class="fragment"><strong> NFD</strong>: <span class="decomp">o + ◌̛ + ◌̉</span>
               <li class="fragment"><strong> NFC</strong>: <span class="decomp">ở</span>
             </ul>
+
+            <aside data-markdown class="notes">
+              - Canonical decomposition is all about characters that look (that
+              is, render) the same.
+              - In this case, NFD, takes its input and breaks it down in to
+              the base character, plus all of its accents in a standard order
+              - NFC takes the canonical decomposition from the previous step
+              and tries to smoosh all the code points together into one code
+              point, if possible.
+            </aside>
           </section>
 
           <section>
@@ -701,8 +741,6 @@ function (s) {
             <aside class="notes" data-markdown>
               - That's why ES6 introduced String#normalize()
               - Can convert into any of the four normalization forms.
-              - **NOT** available in Core.JS, though modern browsers (such as
-                Chrome, FireFox, and Edge [but not Safari :c]) provided it built-in.
             </aside>
           </section>
 
@@ -724,7 +762,13 @@ function (s) {
             <h2> Caveat: </h2>
             <p> Not available in Safari </p>
             <p> Not available in core.js </p>
-            <p> Check the <a href="https://kangax.github.io/compat-table/es6/#test-String.prototype_methods">compatibility table</a> for more details! </p>
+            <p> Check the <a href="https://kangax.github.io/compat-table/es6/#test-String.prototype_methods_String.prototype.normalize">compatibility table</a> for more details! </p>
+
+            <aside class="notes" data-markdown>
+              - **NOT** available in Core.JS, though modern browsers (such as
+                Chrome, FireFox, and Edge [but not Safari :c]) provided it built-in.
+              - With that said, let's fix our app!
+            </aside>
           </section>
         </section>
 
@@ -747,9 +791,13 @@ function (s) {
               </code></pre>
             </div>
 
-            <p class="fragment">
-              <strong> Poorly supported! </strong>
-            </p>
+            <aside class="notes" data-markdown>
+              - If you use astral code points in regular expression ranges, it
+              won't do what you expect. UTF-16 problems abound the default
+              implementation.
+              - However, if you add the 'u' flag, things suddenly work
+                properly.
+            </aside>
           </section>
 
           <section>
@@ -760,18 +808,37 @@ function (s) {
             <p class="fragment"> <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-names-and-keywords">The standard</a> adds <code>$</code> and <code>_</code> to this definition. </p>
 
             <p class="fragment"> <a href="https://mothereff.in/js-variables"> ES6 variable name validator </a> </p>
+
+            <aside class="notes" data-markdown>
+              - There's actually a Unicode report on what's
+              allowed as a valid variable name. Python, Swift, Go, and
+              JavaScript follow it.
+              - Essentially, you can type variable names in any language you
+              like, like Greek... or Chinese... or Cree... or Reddit
+            </aside>
           </section>
 
           <section>
             <h2> Compatibility </h2>
 
-            <p> Check the <a href="https://kangax.github.io/compat-table/es6/#test-String.prototype_methods">compatibility table</a>! </p>
+            <p> Check the <a href="https://kangax.github.io/compat-table/es6/">compatibility table</a>! </p>
+
+            <aside class="notes" data-markdown>
+              - Unfortunately, not every thing is immediately supported, so go
+              to the ES6 compatibility page to see if the engines that you're
+              targetting support the features mentioned in this presentation.
+              - And with that, I'm done.
+            </aside>
           </section>
 
         </section>
 
         <section>
           <h1> ASK ME QUESTIONS </h1>
+
+            <aside class="notes" data-markdown>
+              - ASK ME QUESTIONS!
+            </aside>
         </section>
 
         <section>
