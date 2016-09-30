@@ -278,99 +278,6 @@
 
         <section>
           <section>
-            <h3> It's time to play </h3>
-            <h2 class="fragment">Is <span class="fragment">that</span></h2>
-            <h1 class="fragment">⛎ℕι⊂◎ ₫ℇ?</h1>
-
-            <aside class="notes" data-markdown>
-              - It's time to play...
-              - IS
-              - THAT
-              - UNICODE?!?!?!?!?
-            </aside>
-          </section>
-
-          <section>
-            <h1 class="display-character">
-              ß
-            </h1>
-
-            <div class="fragment">
-              <div class="code-point"> U+00DF </div>
-              <div class="unicode-name"> LATIN SMALL LETTER SHARP S </div>
-            </div>
-          </section>
-
-          <section>
-            <h1 class="display-character">
-              ಠ
-            </h1>
-
-            <div class="fragment">
-              <div class="code-point"> U+0CA0 </div>
-              <div class="unicode-name"> KANNADA LETTER TTHA </div>
-            </div>
-          </section>
-
-          <section>
-            <h1 class="display-character">
-              𠅘
-            </h1>
-
-            <div class="fragment">
-              <div class="code-point"> U+20158 </div>
-              <div class="unicode-name">CJK UNIFIED IDEOGRAPH-20158</div>
-              <p> <i>(Variant of modern</i> 亭 U+4EAD<i>)</i>
-            </div>
-          </section>
-
-          <section>
-            <h1 class="display-character">
-              ᑿ
-            </h1>
-
-            <div class="fragment">
-              <div class="code-point">U+147F</div>
-              <div class="unicode-name">CANADIAN SYLLABICS WEST-CREE KWA</div>
-            </div>
-          </section>
-
-          <section>
-            <h1 class="display-character">
-              🗿
-            </h1>
-
-            <div class="fragment">
-              <div class="code-point">U+1F5FF</div>
-              <div class="unicode-name">MOYAI</div>
-            </div>
-          </section>
-
-          <section>
-            <h1 class="display-character">
-              🆒🐻
-            </h1>
-
-            <div class="fragment">
-              <div class="code-point">U+1F192, U+1F43B</div>
-              <div class="unicode-name">SQUARED COOL, followed by BEAR FACE</div>
-            </div>
-          </section>
-
-          <section>
-            <h1 class="display-character">
-              j
-            </h1>
-
-            <div class="fragment">
-              <div class="code-point">U+006A</div>
-              <div class="unicode-name">LATIN SMALL LETTER J</div>
-            </div>
-          </section>
-        </section>
-
-        <section>
-          <section>
             <h2> <a href="http://unicode.org/glossary/#code_point"> Code Points </a> </h2>
             <p> Unique number given to each character </p>
             <!-- insert some example code points -->
@@ -533,7 +440,6 @@
                 that discussion for another time...
             </aside>
           </section>
-
         </section>
 
         <section>
@@ -759,65 +665,16 @@ function (s) {
           </section>
 
           <section>
-            <h2> Caveat: </h2>
-            <p> Not available in Safari </p>
-            <p> Not available in core.js </p>
-            <p> Check the <a href="https://kangax.github.io/compat-table/es6/#test-String.prototype_methods_String.prototype.normalize">compatibility table</a> for more details! </p>
+            <h2> Let's fix our app! </h2>
 
             <aside class="notes" data-markdown>
-              - **NOT** available in Core.JS, though modern browsers (such as
-                Chrome, FireFox, and Edge [but not Safari :c]) provided it built-in.
-              - With that said, let's fix our app!
+              - With out new knowledge about string normalization,
+                let's fix our app!
             </aside>
           </section>
         </section>
 
         <section>
-          <section>
-            <h1> Odds & Ends </h1>
-          </section>
-
-          <section>
-            <h2> Regexes </h2>
-
-            <pre><code data-trim>
-'🍉'.match(/[🍅-🍓]/) // => false
-            </code></pre>
-
-            <div class="fragment">
-              <h3>vs.</h3>
-              <pre><code data-trim>
-'🍉'.match(/[🍅-🍓]/u) // => true
-              </code></pre>
-            </div>
-
-            <aside class="notes" data-markdown>
-              - If you use astral code points in regular expression ranges, it
-              won't do what you expect. UTF-16 problems abound the default
-              implementation.
-              - However, if you add the 'u' flag, things suddenly work
-                properly.
-            </aside>
-          </section>
-
-          <section>
-            <h2> Identifiers </h2>
-            <p> (A.K.A., variable names) </p>
-
-            <p class="fragment"> <a href="http://www.unicode.org/reports/tr31/">UAX #31</a> defines what a character is </p>
-            <p class="fragment"> <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-names-and-keywords">The standard</a> adds <code>$</code> and <code>_</code> to this definition. </p>
-
-            <p class="fragment"> <a href="https://mothereff.in/js-variables"> ES6 variable name validator </a> </p>
-
-            <aside class="notes" data-markdown>
-              - There's actually a Unicode report on what's
-              allowed as a valid variable name. Python, Swift, Go, and
-              JavaScript follow it.
-              - Essentially, you can type variable names in any language you
-              like, like Greek... or Chinese... or Cree... or Reddit
-            </aside>
-          </section>
-
           <section>
             <h2> Compatibility </h2>
 
@@ -866,16 +723,13 @@ function (s) {
                 <a href="https://www.youtube.com/watch?v=zi0w7J7MCrk">Mathias Bynens: JavaScript ♥ Unicode</a>
               </li>
               <li>
+                <a href="https://www.youtube.com/watch?v=5OPkGQoPeHk">Tom Scott: Accidental Emoji Expert</a>
+              </li>
+              <li>
                 <a href="https://www.youtube.com/watch?v=MijmeoH9LT4">Tom Scott: Characters, Symbols and the Unicode Miracle</a>
               </li>
               <li>
-                <a href="https://www.youtube.com/watch?v=tITwM5GDIAI">Tom Scott: Emoji and the Levitating Businessman</a>
-              </li>
-              <li>
                 <a href="https://www.youtube.com/watch?v=qOcxwRc2Epg">Tom Scott: Why You Can Tweet More In Japanese: What Counts As A Character? </a>
-              </li>
-              <li>
-                <a href="https://www.youtube.com/watch?v=3AtBE9BOvvk">Tom Scott: Real Life Emoji Keyboard!</a>
               </li>
             </ul>
           </section>
@@ -892,7 +746,6 @@ function (s) {
             </ul>
           </section>
         </section>
-
 
       </div>
     </div>
